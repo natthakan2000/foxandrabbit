@@ -3,6 +3,7 @@ package io.muic.ooc.fab.Factory;
 import io.muic.ooc.fab.Field;
 import io.muic.ooc.fab.Location;
 
+import java.util.List;
 import java.util.Random;
 
 public abstract class Animal implements Methods {
@@ -20,8 +21,6 @@ public abstract class Animal implements Methods {
 
     public abstract Location moveToNewLocation();
 
-    protected abstract int getBreedingAge();
-
     protected abstract int getMaxLiterSize();
 
     protected abstract double getBreedingProbability();
@@ -36,9 +35,8 @@ public abstract class Animal implements Methods {
             age = RANDOM.nextInt(getMaxAge());
         }
     }
-
     @Override
-    public void act(List<Methods> newAnimals) {
+    public void run(List<Methods> newAnimals) {
         incrementAge();
         if (isAlive()) {
             giveBirth(newAnimals);
@@ -73,7 +71,6 @@ public abstract class Animal implements Methods {
         return location;
     }
 
-
     @Override
     public void setLocation(Location newLocation) {
         if (location != null) {
@@ -93,7 +90,6 @@ public abstract class Animal implements Methods {
 
     @Override
     public void giveBirth(List<Methods> newAnimals) {
-
         List<Location> free = field.getFreeAdjacentLocations(location);
         int births = breed();
         for (int b = 0; b < births && free.size() > 0; b++) {
@@ -103,13 +99,10 @@ public abstract class Animal implements Methods {
             newAnimals.add(young);
         }
     }
-
     @Override
     public Animal breedOne(Field field, Location location) {
         return AnimalFactory.createAnimal(getClass(), field, location);
     }
-
-
     @Override
     public int breed() {
         int births = 0;
@@ -118,9 +111,11 @@ public abstract class Animal implements Methods {
         }
         return births;
     }
-
     @Override
     public boolean canBreed() {
         return age >= getBreedingAge();
-    }'
+    }
+    protected int getBreedingAge() {
+        return 80;
+    }
 }

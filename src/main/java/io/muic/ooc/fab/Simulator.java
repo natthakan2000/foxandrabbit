@@ -1,6 +1,10 @@
 package io.muic.ooc.fab;
 
 
+import io.muic.ooc.fab.Factory.Animal;
+import io.muic.ooc.fab.Factory.FieldPopulator;
+import io.muic.ooc.fab.Factory.Methods;
+import io.muic.ooc.fab.Factory.Species;
 import io.muic.ooc.fab.view.SimulatorView;
 import java.util.Random;
 import java.util.List;
@@ -15,14 +19,13 @@ public class Simulator {
     private static final int DEFAULT_WIDTH = 120;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 80;
-    // The probability that a fox will be created in any given grid position.
-    private static final double FOX_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+//    // The probability that a fox will be created in any given grid position.
+//    private static final double FOX_CREATION_PROBABILITY = 0.02;
+//    // The probability that a rabbit will be created in any given position.
+//    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
 
     // Lists of animals in the field.
-    private List<Rabbit> rabbits;
-    private List<Fox> foxes;
+    private List<Methods> animals;
     // The current state of the field.
     private Field field;
     // The current step of the simulation.
@@ -53,14 +56,15 @@ public class Simulator {
             width = DEFAULT_WIDTH;
         }
 
-        rabbits = new ArrayList<>();
-        foxes = new ArrayList<>();
+        animals = new ArrayList<>();
         field = new Field(depth, width);
 
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
-        view.setColor(Rabbit.class, Color.ORANGE);
-        view.setColor(Fox.class, Color.BLUE);
+        Species[] animalTypes = Species.values();
+        for (int i = 0; i < animalTypes.length; i++) {
+            view.setColor(animalTypes[i].getAnimalClass(), animalTypes[i].getColor());
+        }
 
         // Setup a valid starting point.
         reset();
@@ -83,7 +87,7 @@ public class Simulator {
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && view.isViable(field); step++) {
             simulateOneStep();
-            // delay(60);   // uncomment this to run more slowly
+            delay(60);   // uncomment this to run more slowly
         }
     }
 
@@ -95,30 +99,17 @@ public class Simulator {
         step++;
 
         // Provide space for newborn rabbits.
-        List<Rabbit> newRabbits = new ArrayList<>();
+        List<Methods> newAnimals = new ArrayList<>();
         // Let all rabbits act.
-        for (Iterator<Rabbit> it = rabbits.iterator(); it.hasNext();) {
-            Rabbit rabbit = it.next();
-            rabbit.run(newRabbits);
-            if (!rabbit.isAlive()) {
+        for (Iterator<Methods> it = animals.iterator(); it.hasNext();) {
+            Animal animal = (Animal) it.next();
+            animal.run(newAnimals);
+            if (!animal.isAlive()) {
                 it.remove();
             }
         }
-
-        // Provide space for newborn foxes.
-        List<Fox> newFoxes = new ArrayList<>();
-        // Let all foxes act.
-        for (Iterator<Fox> it = foxes.iterator(); it.hasNext();) {
-            Fox fox = it.next();
-            fox.hunt(newFoxes);
-            if (!fox.isAlive()) {
-                it.remove();
-            }
-        }
-
         // Add the newly born foxes and rabbits to the main lists.
-        rabbits.addAll(newRabbits);
-        foxes.addAll(newFoxes);
+        animals.addAll(newAnimals);
 
         view.showStatus(step, field);
     }
@@ -128,9 +119,9 @@ public class Simulator {
      */
     public void reset() {
         step = 0;
-        rabbits.clear();
-        foxes.clear();
-        populate();
+        animals.clear();
+        new FieldPopulator().populate(field, animals);
+//        populate();
 
         // Show the starting state in the view.
         view.showStatus(step, field);
@@ -139,24 +130,24 @@ public class Simulator {
     /**
      * Randomly populate the field with foxes and rabbits.
      */
-    private void populate() {
-        
-        field.clear();
-        for (int row = 0; row < field.getDepth(); row++) {
-            for (int col = 0; col < field.getWidth(); col++) {
-                if (RANDOM.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Fox fox = new Fox(true, field, location);
-                    foxes.add(fox);
-                } else if (RANDOM.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Location location = new Location(row, col);
-                    Rabbit rabbit = new Rabbit(true, field, location);
-                    rabbits.add(rabbit);
-                }
-                // else leave the location empty.
-            }
-        }
-    }
+//    private void populate() {
+//
+//        field.clear();
+//        for (int row = 0; row < field.getDepth(); row++) {
+//            for (int col = 0; col < field.getWidth(); col++) {
+//                if (RANDOM.nextDouble() <= FOX_CREATION_PROBABILITY) {
+//                    Location location = new Location(row, col);
+//                    Fox fox = new Fox(true, field, location);
+//                    foxes.add(fox);
+//                } else if (RANDOM.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
+//                    Location location = new Location(row, col);
+//                    Rabbit rabbit = new Rabbit(true, field, location);
+//                    rabbits.add(rabbit);
+//                }
+//                // else leave the location empty.
+//            }
+//        }
+//    }
 
     /**
      * Pause for a given time.

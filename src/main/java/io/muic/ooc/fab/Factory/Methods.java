@@ -17,7 +17,7 @@ public interface Methods {
     void init(boolean randomAge, Field field, Location location);
 
 
-    void act(List<Methods> newAnimals);
+    void run(List<Methods> newAnimals);
 
     /**
      * Check whether the animal is alive or not.
