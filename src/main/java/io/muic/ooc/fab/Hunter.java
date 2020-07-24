@@ -30,15 +30,15 @@ public class Hunter extends Animal {
     }
     @Override
     public void run(List<Methods> newAnimals) {
-        incrementHunger();
+        //incrementHunger();
         super.run(newAnimals);
     }
-    public void incrementHunger() {
-        foodLevel--;
-        if (foodLevel <= 0) {
-            setDead();
-        }
-    }
+//    public void incrementHunger() {
+//        foodLevel--;
+//        if (foodLevel <= 0) {
+//            setDead();
+//        }
+//    }
     public Location findFood() {
         List<Location> adjacent = field.adjacentLocations(getLocation());
         Iterator<Location> it = adjacent.iterator();
