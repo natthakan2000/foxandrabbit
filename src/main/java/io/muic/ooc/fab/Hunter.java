@@ -41,9 +41,7 @@ public class Hunter extends Animal {
 //    }
     public Location findFood() {
         List<Location> adjacent = field.adjacentLocations(getLocation());
-        Iterator<Location> it = adjacent.iterator();
-        while (it.hasNext()) {
-            Location where = it.next();
+        for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
             if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
@@ -52,14 +50,14 @@ public class Hunter extends Animal {
                     foodLevel = Species.RABBIT.getFoodValue();
                     return where;
                 }
-            }else if (animal instanceof Fox) {
+            } else if (animal instanceof Fox) {
                 Fox fox = (Fox) animal;
                 if (fox.isAlive()) {
                     fox.setDead();
                     foodLevel = Species.FOX.getFoodValue();
                     return where;
                 }
-            }else if (animal instanceof Tiger) {
+            } else if (animal instanceof Tiger) {
                 Tiger tiger = (Tiger) animal;
                 if (tiger.isAlive()) {
                     tiger.setDead();

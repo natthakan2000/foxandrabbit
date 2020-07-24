@@ -13,12 +13,10 @@ public class FieldPopulator {
 
     private Map<Species,Double> probabilityMap = new HashMap<Species, Double>(){{
         Species[] animalTypes = Species.values();
-        for (int i = 0; i < animalTypes.length; i++) {
-            put(animalTypes[i], animalTypes[i].getBreedingProbability());
-        }}};
-
-
-
+        for (Species animalType : animalTypes) {
+            put(animalType, animalType.getBreedingProbability());
+        }
+    }};
     public void populate(Field field, List<Methods> animals) {
         field.clear();
         for (int row = 0; row < field.getDepth(); row++) {

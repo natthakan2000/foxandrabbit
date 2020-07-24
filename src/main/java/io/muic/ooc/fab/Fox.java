@@ -70,9 +70,7 @@ public class Fox extends Animal {
 
     public Location findFood() {
         List<Location> adjacent = field.adjacentLocations(getLocation());
-        Iterator<Location> it = adjacent.iterator();
-        while (it.hasNext()) {
-            Location where = it.next();
+        for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);
             if (animal instanceof Rabbit) {
                 Rabbit rabbit = (Rabbit) animal;
