@@ -9,8 +9,8 @@ import java.util.Map;
 public class AnimalFactory {
     private static Map<Species, Class> animalClassMap = new HashMap<Species, Class>() {{
         Species[] species = Species.values();
-        for (int i = 0; i < species.length; i++) {
-            put(species[i], species[i].getAnimalClass());
+        for (Species value : species) {
+            put(value, value.getAnimalClass());
         }
     }};
     public static Animal createAnimal(Species species, Field field, Location location) {

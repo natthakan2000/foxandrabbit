@@ -18,7 +18,7 @@ public class FieldPopulator {
         }
     }};
     public void populate(Field field, List<Methods> animals) {
-        field.clear();
+        field.clear(); //start of simulation clear field
         for (int i = 0; i < field.getDepth(); i++) {
             for (int j = 0; j < field.getWidth(); j++) {
                 for (Map.Entry<Species, Double> entry : probabilityMap.entrySet()){
