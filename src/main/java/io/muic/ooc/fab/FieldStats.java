@@ -4,17 +4,16 @@ import java.util.HashMap;
 
 public class FieldStats {
 
-    // Counters for each type of entity (fox, rabbit, etc.) in the simulation.
+    // Counters for each type of entity
     private HashMap<Class, Counter> counters;
-    // Whether the counters are currently up to date.
+    // Check if the counters are currently up to date.
     private boolean countsValid;
 
     /**
      * Construct a FieldStats object.
      */
     public FieldStats() {
-        // Set up a collection for counters for each type of animal that
-        // we might find
+        //collection for counters for each type of animal that
         counters = new HashMap<>();
         countsValid = true;
     }
@@ -59,8 +58,6 @@ public class FieldStats {
     public void incrementCount(Class animalClass) {
         Counter count = counters.get(animalClass);
         if (count == null) {
-            // We do not have a counter for this species yet.
-            // Create one.
             count = new Counter(animalClass.getName());
             counters.put(animalClass, count);
         }

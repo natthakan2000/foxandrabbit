@@ -1,5 +1,6 @@
 package io.muic.ooc.fab.Factory;
 
+import io.muic.ooc.fab.Counter;
 import io.muic.ooc.fab.Field;
 import io.muic.ooc.fab.Location;
 
@@ -94,7 +95,6 @@ public abstract class Animal implements Methods {
         int births = breed();
         for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-
             Animal young = breedOne(field, loc);
             newAnimals.add(young);
         }

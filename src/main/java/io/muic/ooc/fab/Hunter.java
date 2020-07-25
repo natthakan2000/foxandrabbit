@@ -7,7 +7,7 @@ import io.muic.ooc.fab.Factory.Species;
 import java.util.List;
 
 public class Hunter extends Animal {
-    private int foodLevel;
+    //private int foodLevel;
     @Override
     public void initialise(boolean randomAge, Field field, Location location) {
         super.initialise(randomAge, field, location);
@@ -28,7 +28,7 @@ public class Hunter extends Animal {
         return newLocation;
     }
     @Override
-    public void run(List<Methods> newAnimals) {
+    public void run(List<Methods> newAnimals) { //not sure
         //incrementHunger();
         super.run(newAnimals);
     }
@@ -46,21 +46,21 @@ public class Hunter extends Animal {
                 Rabbit rabbit = (Rabbit) animal;
                 if (rabbit.isAlive()) {
                     rabbit.setDead();
-                    foodLevel = Species.RABBIT.getFoodValue();
+                    //foodLevel = Species.RABBIT.getFoodValue();
                     return where;
                 }
             } else if (animal instanceof Fox) {
                 Fox fox = (Fox) animal;
                 if (fox.isAlive()) {
                     fox.setDead();
-                    foodLevel = Species.FOX.getFoodValue();
+                    //foodLevel = Species.FOX.getFoodValue();
                     return where;
                 }
             } else if (animal instanceof Tiger) {
                 Tiger tiger = (Tiger) animal;
                 if (tiger.isAlive()) {
                     tiger.setDead();
-                    foodLevel = Species.TIGER.getFoodValue();
+                    //foodLevel = Species.TIGER.getFoodValue();
                     return where;
                 }
             }

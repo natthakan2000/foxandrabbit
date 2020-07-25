@@ -67,7 +67,7 @@ public class Fox extends Animal {
      * @return Where food was found, or null if it wasn't.
      */
 
-    public Location findFood() {
+    public Location findFood() { //can only eat rabbit
         List<Location> adjacent = field.adjacentLocations(getLocation());
         for (Location where : adjacent) {
             Object animal = field.getObjectAt(where);

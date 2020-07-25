@@ -23,12 +23,10 @@ public class AnimalFactory {
                 Animal animal = (Animal) animalClass.newInstance();
                 animal.initialise(true, field, location);
                 return animal;
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-        throw new IllegalArgumentException("Unknown Species");
+        throw new IllegalArgumentException();
     }
 }

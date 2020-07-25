@@ -58,8 +58,6 @@ public class Simulator {
 
         animals = new ArrayList<>();
         field = new Field(depth, width);
-
-        // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         Species[] animalTypes = Species.values();
         for (int i = 0; i < animalTypes.length; i++) {
@@ -97,10 +95,7 @@ public class Simulator {
      */
     public void simulateOneStep() {
         step++;
-
-        // Provide space for newborn rabbits.
         List<Methods> newAnimals = new ArrayList<>();
-        // Let all rabbits act.
         for (Iterator<Methods> it = animals.iterator(); it.hasNext();) {
             Animal animal = (Animal) it.next();
             animal.run(newAnimals);
@@ -108,7 +103,6 @@ public class Simulator {
                 it.remove();
             }
         }
-        // Add the newly born foxes and rabbits to the main lists.
         animals.addAll(newAnimals);
 
         view.showStatus(step, field);
@@ -157,8 +151,7 @@ public class Simulator {
     private void delay(int millisec) {
         try {
             Thread.sleep(millisec);
-        } catch (InterruptedException ie) {
-            // wake up
+        } catch (InterruptedException ignored) {
         }
     }
 }

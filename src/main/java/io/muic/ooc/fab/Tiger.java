@@ -15,8 +15,8 @@ public class Tiger extends Animal {
     }
     @Override
     protected int getMaxAge() {
-        return 175;
-    }
+        return 100;
+    } //reduce max age allow more fox to survive
     @Override
     protected double getBreedingProbability() {
         return Species.TIGER.getBreedingProbability();
