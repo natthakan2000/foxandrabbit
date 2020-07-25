@@ -28,7 +28,7 @@ public abstract class Animal implements Methods {
     protected abstract int getMaxAge();
 
     @Override
-    public void init(boolean randomAge, Field field, Location location) {
+    public void initialise(boolean randomAge, Field field, Location location) {
         this.field = field;
         setLocation(location);
         if (randomAge) {

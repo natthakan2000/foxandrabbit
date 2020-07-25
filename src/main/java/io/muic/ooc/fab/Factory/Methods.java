@@ -14,7 +14,7 @@ public interface Methods {
      * @param field     The field currently occupied.
      * @param location  The location within the field.
      */
-    void init(boolean randomAge, Field field, Location location);
+    void initialise(boolean randomAge, Field field, Location location);
 
 
     void run(List<Methods> newAnimals);

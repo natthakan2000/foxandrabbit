@@ -4,14 +4,13 @@ import io.muic.ooc.fab.Factory.Animal;
 import io.muic.ooc.fab.Factory.Methods;
 import io.muic.ooc.fab.Factory.Species;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class Hunter extends Animal {
     private int foodLevel;
     @Override
-    public void init(boolean randomAge, Field field, Location location) {
-        super.init(randomAge, field, location);
+    public void initialise(boolean randomAge, Field field, Location location) {
+        super.initialise(randomAge, field, location);
     }
     @Override
     protected int getMaxAge() {

@@ -6,8 +6,6 @@ import io.muic.ooc.fab.Location;
 import java.util.HashMap;
 import java.util.Map;
 
-import static javax.swing.UIManager.put;
-
 public class AnimalFactory {
     private static Map<Species, Class> animalClassMap = new HashMap<Species, Class>() {{
         Species[] species = Species.values();
@@ -23,7 +21,7 @@ public class AnimalFactory {
         if (animalClass != null) {
             try {
                 Animal animal = (Animal) animalClass.newInstance();
-                animal.init(true, field, location);
+                animal.initialise(true, field, location);
                 return animal;
             } catch (InstantiationException e) {
                 e.printStackTrace();
