@@ -8,10 +8,10 @@ import io.muic.ooc.fab.Tiger;
 import java.awt.*;
 
 public enum Species {
-    RABBIT(0.1,Rabbit .class, Color.BLUE, 8),
-    FOX(0.1, Fox.class, Color.green, 20),
-    TIGER(0.03, Tiger.class, Color.YELLOW, 60), //change from 40 to 60
-    HUNTER(0.0009, Hunter.class, Color.RED, 0);
+    RABBIT(0.1,Rabbit .class, Color.PINK, 8),
+    FOX(0.1, Fox.class, Color.ORANGE, 20),
+    TIGER(0.03, Tiger.class, Color.RED, 60), //change from 40 to 60
+    HUNTER(0.0009, Hunter.class, Color.BLACK, 0);
     private double breedingProbability;
     private Class animalClass;
     private Color color;
